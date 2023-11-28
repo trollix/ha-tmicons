@@ -47,7 +47,7 @@ def process_svg_directory(input_directory, output_json_file):
 
 
 if __name__ == "__main__":
-    input_svg_directory = "./icons"
+    input_svg_directory = "./icons/SVG"
     output_json_file = "./outputs.json"
 
     process_svg_directory(input_svg_directory, output_json_file)
