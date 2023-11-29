@@ -7,15 +7,21 @@ Home assistant More icons
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=flat)](https://github.com/custom-components/hacs)
 
-Additional vector icons for Home Assistant, 
-Inspired by the Hue icons in the iOS app, and for personal use only, this repo also features custom vectors created specifically by the author for Hue
-fixtures and groups that aren't represented by the 'official' icon set.
+Additional vector icons for Home Assistant, this repo add more icons custom vectors created specifically by the author of typeicons:
 
-## <a name="installation"></a>Installation
+## Typicons
 
-HA-tmicons has been accepted into the [Home Assistant Community Store (HACS)](https://hacs.xyz).
+Typeicons are free-to-use vector icons embedded in a webfont for use in your user interfaces, whether it be on the web or in a native application.
+The set of icons are available on Github, with everything included from the source files in SVG format to the minifed CSS. You can even use this project to build your own custom version of Typicons.This version greatly improves Typicons, with the addition on 220 icons with solid and outline styles and Github hosting of the source content. Combine HTTP requests with a retina ready, resolution independent webfont.
 
-### HACS (Recommended):
+[Typeicons](https://www.s-ings.com/typicons/)
+
+## Installation
+
+HA-tmicons has not been already accepted into the [Home Assistant Community Store (HACS)](https://hacs.xyz).
+
+### HACS (Recommended)
+
 This is the recommended way to install hass-hue-icons. Hass-hue-icons is a default repository for HACS. To install:
 
 - Open HACS (installation instructions are [here](https://hacs.xyz/docs/installation/installation/)).
@@ -31,7 +37,7 @@ frontend:
     - /hacsfiles/ha-tmicons/ha-tmicons.js
 ```
 
-### Manual:
+### Manual
 
 - Copy `dist/ha-tmicons.js` into your `config/www` folder.
 - Go to Configuration -> Lovelace Dashboards -> Resources -> Add Resource
@@ -51,7 +57,7 @@ frontend:
 - In your entity editor, specify an icon as `tmi:icon-name`
 - If you set `state_color: true` in your card, you'll see the icons get colorised based upon the current RGB setting.
 
-### Example :
+### Example
 
 ```yaml
 title: My Room
@@ -66,3 +72,7 @@ entities:
 ## Icons
 
 ![Image of HA-TMICONS](https://github.com/trollix/ha-tmicons/blob/main/icons_combined_with_names.png?raw=true)
+
+## Typeicons
+
+[Typeicons](https://www.s-ings.com/typicons/)

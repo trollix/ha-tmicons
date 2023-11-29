@@ -3,7 +3,7 @@ import os
 import xml.etree.ElementTree as ET
 import json
 
-CARD_VERSION = "0.3.2"
+CARD_VERSION = "0.3.3"
 CARD_NAME = "HA-TMICONS"
 
 
