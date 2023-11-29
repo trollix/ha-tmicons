@@ -1,6 +1,11 @@
+# pylint: skip-file
 import os
 import xml.etree.ElementTree as ET
 import json
+
+CARD_VERSION = "0.3.0"
+CARD_NAME = "HA-TMICONS"
+
 
 def process_svg_directory(input_directory, output_json_file):
     # Crée une structure de données pour stocker les informations extraites
@@ -24,7 +29,7 @@ def process_svg_directory(input_directory, output_json_file):
                 d_value = element.attrib.get("d", "")
                 if d_value:  # Ne conserver que si l'attribut "d" n'est pas vide
                     svg_data[filename_without_extension] = {"d": d_value}
-                    '''
+            '''
 
             # Parcours les éléments du fichier SVG
             for element in root.iter():
@@ -43,11 +48,52 @@ def process_svg_directory(input_directory, output_json_file):
             json_output.write(f'  "{key}": {json.dumps(value, indent=2)},\n')
         json_output.write("};\n")
 
+        json_output.write("""
+                          
+async function getIcon(name) {
+  let new_name;
+  
+  if (!(name in TMICONS_MAP)) {
+    // try swapping the '_' for a '-'
+    new_name = name.replace(/_/gm, `-`);
+    if (!(new_name in TMICONS_MAP)) {
+      //console.log(`Icon "${name}" is not available`);
+      return '';
+    }else{
+      console.log(`Aliased "${name}" with "${new_name}"`);
+      return {path: TMICONS_MAP[new_name].path};
+    }
+  }
+  return {path: TMICONS_MAP[name].path};
+}
+
+async function getIconList() {
+  return Object.entries(TMICONS_MAP).map(([icon, content]) => ({
+    name: icon,
+    keywords: content.keywords
+  }));
+}
+window.customIcons = window.customIcons || {};
+window.customIcons["tmi"] = { getIcon, getIconList };
+  
+window.customIconsets = window.customIconsets || {};
+window.customIconsets["tmi"] = getIcon;
+  
+ 
+const CARD_VERSION = '""" + CARD_VERSION + """';
+const CARD_NAME = '""" + CARD_NAME + """';
+console.info(
+  `%c  ${CARD_NAME}  %c  Version ${CARD_VERSION}  `,
+    'color: white; font-weight: bold; background: crimson',
+    'color: #000; font-weight: bold; background: #ddd',
+); 
+\n                  """ )
+
 
 
 
 if __name__ == "__main__":
-    input_svg_directory = "./icons2/SVG"
-    output_json_file = "./outputs2.json"
+    input_svg_directory = "./src/icons2/SVG"
+    output_json_file = "./dist/ha-tmicons.js"
 
     process_svg_directory(input_svg_directory, output_json_file)

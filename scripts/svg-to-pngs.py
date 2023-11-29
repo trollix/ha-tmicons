@@ -1,3 +1,4 @@
+# pylint: skip-file
 import os
 import cairosvg
 
@@ -19,6 +20,6 @@ def convert_svg_to_png(input_directory, output_directory):
 
 if __name__ == "__main__":
     input_directory = "./icons2/SVG"
-    output_directory = "./dist"
+    output_directory = "./dist/icons2/PNG"
 
     convert_svg_to_png(input_directory, output_directory)
