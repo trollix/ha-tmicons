@@ -8,7 +8,7 @@ def chunks(lst, chunk_size):
     for i in range(0, len(lst), chunk_size):
         yield lst[i:i + chunk_size]
 
-def convert_svg_to_single_png(input_directory, output_path, columns=10, spacing=10):
+def convert_svg_to_single_png(input_directory, output_path, columns=10, spacing=10, icon_size=(100, 100), font_size=12):
     # Crée une liste pour stocker les images PNG individuelles
     images = []
     icon_names = []  # Ajout de la liste pour stocker les noms des icônes
@@ -25,12 +25,18 @@ def convert_svg_to_single_png(input_directory, output_path, columns=10, spacing=
 
             # Convertit les données PNG en objet Image
             png_image = Image.open(io.BytesIO(png_data))
+            # Redimensionne l'image à la taille souhaitée
+            png_image = png_image.resize(icon_size)
             images.append(png_image)
             icon_names.append(os.path.splitext(filename)[0])  # Récupère le nom sans extension
 
-    # Divise la liste des images et des noms en groupes de 'columns'
-    image_groups = list(chunks(images, columns))
-    name_groups = list(chunks(icon_names, columns))
+    # Trie les noms des icônes par ordre alphabétique
+    sorted_icons = sorted(zip(icon_names, images), key=lambda x: x[0])
+    sorted_icon_names, sorted_images = zip(*sorted_icons)
+
+    # Divise la liste des images et des noms triés en groupes de 'columns'
+    image_groups = list(chunks(sorted_images, columns))
+    name_groups = list(chunks(sorted_icon_names, columns))
 
     # Crée une liste pour stocker les images concaténées horizontalement
     combined_images = []
@@ -47,7 +53,9 @@ def convert_svg_to_single_png(input_directory, output_path, columns=10, spacing=
 
             # Ajoute le nom de l'icône sous l'image
             draw = ImageDraw.Draw(combined_image_horizontal)
-            font = ImageFont.load_default()  # Vous pouvez ajuster la police si nécessaire
+
+            # Utilise une police truetype avec une taille spécifiée
+            font = ImageFont.truetype("Arial.ttf", font_size)
 
             # Calcul des dimensions du texte avec sauts de ligne
             text_bbox = draw.textbbox((x_offset, image.height + 5), icon_name, font=font)
@@ -56,7 +64,7 @@ def convert_svg_to_single_png(input_directory, output_path, columns=10, spacing=
             # Positionnement du texte sous l'image avec une petite marge
             text_position = (x_offset + (image.width - text_width) / 2, image.height + 5)
 
-            draw.text(text_position, icon_name, (0, 0, 0), font=font)
+            draw.text(text_position, icon_name, (0, 0, 0), font=font)  # Couleur du texte : noir (0, 0, 0)
 
             x_offset += image.width + spacing
 
@@ -76,4 +84,4 @@ if __name__ == "__main__":
     input_directory = "./src/icons2/SVG"
     output_path = "./icons_combined_with_names.png"
 
-    convert_svg_to_single_png(input_directory, output_path, columns=10, spacing=80)
+    convert_svg_to_single_png(input_directory, output_path, columns=15, spacing=80, icon_size=(75, 75), font_size=20)

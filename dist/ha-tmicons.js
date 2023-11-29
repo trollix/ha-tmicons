@@ -1373,7 +1373,7 @@ window.customIconsets = window.customIconsets || {};
 window.customIconsets["tmi"] = getIcon;
   
  
-const CARD_VERSION = '0.3.0';
+const CARD_VERSION = '0.3.2';
 const CARD_NAME = 'HA-TMICONS';
 console.info(
   `%c  ${CARD_NAME}  %c  Version ${CARD_VERSION}  `,

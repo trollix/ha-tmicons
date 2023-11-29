@@ -7,10 +7,9 @@ Home assistant More icons
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=flat)](https://github.com/custom-components/hacs)
 
-Additional vector icons for Home Assistant, to better represent Philips Hue bulbs and fixtures.
+Additional vector icons for Home Assistant, 
 Inspired by the Hue icons in the iOS app, and for personal use only, this repo also features custom vectors created specifically by the author for Hue
 fixtures and groups that aren't represented by the 'official' icon set.
-
 
 ## <a name="installation"></a>Installation
 
@@ -24,18 +23,22 @@ This is the recommended way to install hass-hue-icons. Hass-hue-icons is a defau
 - Click button with "+" icon
 - Search for "hass hue icons" and install it.
 - Add the following to your configuration.yaml, save and restart HA.
-```
+
+```yaml
+
 frontend:
   extra_module_url:
     - /hacsfiles/ha-tmicons/ha-tmicons.js
 ```
 
 ### Manual:
+
 - Copy `dist/ha-tmicons.js` into your `config/www` folder.
 - Go to Configuration -> Lovelace Dashboards -> Resources -> Add Resource
 - set url as `/local/ha-tmicons.js` and Resource Type as `Javascript Module`.
 - Add the following to your configuration.yaml, save and restart HA.
-```
+
+```yaml
 frontend:
   extra_module_url:
     - /local/ha-tmicons.js
@@ -43,14 +46,14 @@ frontend:
 
 - Save, restart Home Assistant.
 
-
 ## Usage
+
 - In your entity editor, specify an icon as `tmi:icon-name`
 - If you set `state_color: true` in your card, you'll see the icons get colorised based upon the current RGB setting.
 
-### Example:
+### Example :
 
-```
+```yaml
 title: My Room
 state_color: true
 type: entities
