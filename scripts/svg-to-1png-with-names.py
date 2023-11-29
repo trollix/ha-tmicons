@@ -73,7 +73,7 @@ def convert_svg_to_single_png(input_directory, output_path, columns=10, spacing=
     combined_image_vertical.save(output_path, format="PNG")
 
 if __name__ == "__main__":
-    input_directory = "./icons2/SVG"
-    output_path = "./dist/icons_combined_with_names_columns.png"
+    input_directory = "./src/icons2/SVG"
+    output_path = "./icons_combined_with_names.png"
 
     convert_svg_to_single_png(input_directory, output_path, columns=10, spacing=80)
